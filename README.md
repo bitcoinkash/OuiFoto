@@ -4,7 +4,7 @@ This is the previous and open source version of OuiFoto.com. It's the very first
 
 
 
-[![Room GPT](./public/screenshot.png)](https://OuiFoto.com)
+[![OuiFoto](./public/screenshot.png)](https://OuiFoto.com)
 
 ## How it works
 
