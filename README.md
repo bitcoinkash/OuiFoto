@@ -1,4 +1,4 @@
-# [RoomGPT](https://OuiFoto.com) - redesign your room with AI
+# [OuiFoto](https://OuiFoto.com) - redesign your room with AI
 
 This is the previous and open source version of OuiFoto.com. It's the very first version of OuiFoto without the auth, payments, or additional features and it's simple to clone, deploy, and play around with.
 
