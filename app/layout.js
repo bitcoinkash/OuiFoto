@@ -7,7 +7,7 @@ let description = "Generate your dream listing in seconds.";
 let ogimage = "https://roomgpt-demo.vercel.app/og-image.png";
 let sitename = "OuiFoto.com";
 
-export const metadata: Metadata = {
+export const metadata = {
   title,
   description,
   icons: {
@@ -30,11 +30,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-[#17181C] text-white">

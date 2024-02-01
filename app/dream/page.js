@@ -17,40 +17,40 @@ import downloadPhoto from "../../utils/downloadPhoto";
 import DropDown from "../../components/DropDown";
 import { roomType, rooms, themeType, themes } from "../../utils/dropdownTypes";
 
-const options: UploadWidgetConfig = {
-  apiKey: !!process.env.NEXT_PUBLIC_UPLOAD_API_KEY
-      ? process.env.NEXT_PUBLIC_UPLOAD_API_KEY
-      : "free",
+const options = {
+  apiKey: process.env.NEXT_PUBLIC_UPLOAD_API_KEY
+    ? process.env.NEXT_PUBLIC_UPLOAD_API_KEY
+    : "free",
   maxFileCount: 1,
   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
   editor: { images: { crop: false } },
   styles: {
     colors: {
-      primary: "#2563EB", // Primary buttons & links
-      error: "#d23f4d", // Error messages
-      shade100: "#fff", // Standard text
-      shade200: "#fffe", // Secondary button text
-      shade300: "#fffd", // Secondary button text (hover)
-      shade400: "#fffc", // Welcome text
-      shade500: "#fff9", // Modal close button
-      shade600: "#fff7", // Border
-      shade700: "#fff2", // Progress indicator background
-      shade800: "#fff1", // File item background
-      shade900: "#ffff", // Various (draggable crop buttons, etc.)
+      primary: "#2563EB",
+      error: "#d23f4d",
+      shade100: "#fff",
+      shade200: "#fffe",
+      shade300: "#fffd",
+      shade400: "#fffc",
+      shade500: "#fff9",
+      shade600: "#fff7",
+      shade700: "#fff2",
+      shade800: "#fff1",
+      shade900: "#ffff",
     },
   },
 };
 
 export default function DreamPage() {
-  const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [restoredImage, setRestoredImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [restoredLoaded, setRestoredLoaded] = useState<boolean>(false);
-  const [sideBySide, setSideBySide] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [photoName, setPhotoName] = useState<string | null>(null);
-  const [theme, setTheme] = useState<themeType>("Modern");
-  const [room, setRoom] = useState<roomType>("Living Room");
+  const [originalPhoto, setOriginalPhoto] = useState(null);
+  const [restoredImage, setRestoredImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [restoredLoaded, setRestoredLoaded] = useState(false);
+  const [sideBySide, setSideBySide] = useState(false);
+  const [error, setError] = useState(null);
+  const [photoName, setPhotoName] = useState(null);
+  const [theme, setTheme] = useState("Modern");
+  const [room, setRoom] = useState("Living Room");
 
   const UploadDropZone = () => (
     <UploadDropzone
@@ -64,8 +64,8 @@ export default function DreamPage() {
             filePath: image.filePath,
             options: {
               transformation: "preset",
-              transformationPreset: "thumbnail"
-            }
+              transformationPreset: "thumbnail",
+            },
           });
           setPhotoName(imageName);
           setOriginalPhoto(imageUrl);
@@ -77,7 +77,7 @@ export default function DreamPage() {
     />
   );
 
-  async function generatePhoto(fileUrl: string) {
+  async function generatePhoto(fileUrl) {
     await new Promise((resolve) => setTimeout(resolve, 200));
     setLoading(true);
     const res = await fetch("/generate", {
@@ -125,9 +125,7 @@ export default function DreamPage() {
                     </div>
                     <DropDown
                       theme={theme}
-                      setTheme={(newTheme) =>
-                        setTheme(newTheme as typeof theme)
-                      }
+                      setTheme={(newTheme) => setTheme(newTheme)}
                       themes={themes}
                     />
                   </div>
@@ -145,7 +143,7 @@ export default function DreamPage() {
                     </div>
                     <DropDown
                       theme={room}
-                      setTheme={(newRoom) => setRoom(newRoom as typeof room)}
+                      setTheme={(newRoom) => setRoom(newRoom)}
                       themes={rooms}
                     />
                   </div>
@@ -183,8 +181,8 @@ export default function DreamPage() {
               </div>
               {restoredLoaded && sideBySide && (
                 <CompareSlider
-                  original={originalPhoto!}
-                  restored={restoredImage!}
+                  original={originalPhoto}
+                  restored={restoredImage}
                 />
               )}
               {!originalPhoto && <UploadDropZone />}
@@ -211,7 +209,11 @@ export default function DreamPage() {
                   </div>
                   <div className="sm:mt-0 mt-8">
                     <h2 className="mb-1 font-medium text-lg">Generated Room</h2>
-                    <a href={restoredImage} target="_blank" rel="noreferrer">
+                    <a
+                      href={restoredImage}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <Image
                         alt="restored photo"
                         src={restoredImage}
@@ -260,8 +262,8 @@ export default function DreamPage() {
                   <button
                     onClick={() => {
                       downloadPhoto(
-                        restoredImage!,
-                        appendNewToName(photoName!)
+                        restoredImage,
+                        appendNewToName(photoName)
                       );
                     }}
                     className="bg-white rounded-full text-black border font-medium px-4 py-2 mt-8 hover:bg-gray-100 transition"
